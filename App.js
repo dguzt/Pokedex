@@ -1,12 +1,21 @@
-import { NavigationContainer } from '@react-navigation/native';
-import MainNav from './src/MainNav';
 import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { SWRConfig } from 'swr';
+import Constants from 'expo-constants';
+import { fetcher } from './src/common/requests';
+import MainNav from './src/MainNav';
 
 function App() {
   return (
-    <NavigationContainer>
-      <MainNav />
-    </NavigationContainer>
+    <SWRConfig
+      value={{
+        refreshInterval: 60_000,
+      }}
+    >
+      <NavigationContainer>
+        <MainNav />
+      </NavigationContainer>
+    </SWRConfig>
   );
 }
 

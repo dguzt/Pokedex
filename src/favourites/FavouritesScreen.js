@@ -1,5 +1,5 @@
 import { Text } from 'react-native';
-import View from '../common/layout/View';
+import View from '../common/Layout/View';
 
 function FavouritesScreen() {
   return (

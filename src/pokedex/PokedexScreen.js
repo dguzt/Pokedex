@@ -1,14 +1,23 @@
-import { Text } from 'react-native';
-import View from '../common/layout/View';
-import usePokemons from './usePokemons';
+import { Text, View } from 'react-native';
+import usePokemons, { useInfinitePokemons } from './usePokemons';
+import { PokeList } from './PokeList';
+import { useCallback } from 'react';
 
 function PokedexScreen() {
-  const { pokemons, error, isLoading } = usePokemons();
-  console.log('POKEMONS: ', error, isLoading, pokemons);
+  const { pokemons, setPages, pages, isLoading } = useInfinitePokemons();
+
+  const loadMorePokemons = useCallback(() => setPages(pages + 1), [setPages]);
+
+  if (isLoading) {
+    return <Text>Is loading!</Text>;
+  }
 
   return (
     <View>
-      <Text>Pokedex</Text>
+      <PokeList
+        pokemons={pokemons}
+        loadMorePokemons={loadMorePokemons}
+      />
     </View>
   );
 }

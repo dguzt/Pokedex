@@ -9,7 +9,7 @@ function App() {
   return (
     <SWRConfig
       value={{
-        refreshInterval: 60_000,
+        refreshInterval: 600_000,
       }}
     >
       <NavigationContainer>

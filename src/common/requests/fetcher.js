@@ -1,7 +1,9 @@
 import { removeSlashes } from '../format/uri';
 
 async function fetcher(url, uri, init = {}) {
-  const fullUrl = `${removeSlashes(url)}/${removeSlashes(uri)}`;
+  const params = `${!init.params ? '' : '?'}${new URLSearchParams(init.params).toString()}`;
+  const fullUrl = `${removeSlashes(url)}/${removeSlashes(uri)}${params}`;
+
   console.log('Request ===> ', '000', fullUrl);
   const res = await fetch(fullUrl, init);
   console.log('Request <=== ', res.status, fullUrl);

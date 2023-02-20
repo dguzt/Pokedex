@@ -1,10 +1,10 @@
 import useSWR from 'swr';
-import { fetcher } from '../common/requests';
+import { fetcher } from '../../common/requests';
 import Constants from 'expo-constants';
 
 function usePokemon({ pokemonId }) {
   const url = Constants.expoConfig.extra.apiUrl;
-  const { data, error, isLoading } = useSWR(`/pokemon/${pokemonId}`, ([uri, ...rest]) =>
+  const { data, error, isLoading } = useSWR(`/pokemon/${pokemonId}`, (uri) =>
     fetcher(url, uri, {})
   );
 
@@ -21,7 +21,7 @@ function getPokemonFromData(data) {
   return {
     id: data.id,
     name: data.name,
-    type: data.type[0].type.name,
+    type: data.types[0].type.name,
     order: data.order,
     image: data.sprites.other['official-artwork']['front_default'],
   };
